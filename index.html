@@ -9,10 +9,18 @@
  <body>
 
  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
- 	<p id="customers">customers</p>
+ 	<p class="customers-dropdown-close">customers</p>
  	<nav class="customers-dropdown" id="customers-dropdown">
  		<div class="customers-dropdown_container">
  			<div class="customers-dropdown_menu">
+
+ 				<div class="customers-dropdown_menu-closeWrapper">
+
+ 					<div class="customers-dropdown_menu-close">
+ 						<img style="width: 50px;height: 10px;max-width: 50px;" src="https://f.hubspotusercontent10.net/hubfs/3283010/5d5b0fb043b14c77adce17f1_numaName.png">
+ 						<span class="customers-dropdown-close">close</span>
+ 					</div>
+ 				</div>
 
  				<a href="/customers" class="customers-dropdown_menu-item">
  					<div class="dropdown_menu-item_icon">
@@ -176,7 +184,12 @@
 			border-radius: 5px 5px 20px 20px;
 			padding: 13px;
 		}
-
+		/*=============*/
+		/* customers-dropdown_menu-close */
+		/*=============*/
+		.customers-dropdown_menu-closeWrapper{
+			display: none;
+		}
 		/*=============*/
 		/* customers-dropdown_menu-item */
 		/*=============*/
@@ -232,11 +245,11 @@
 			color: rgba(40,51,56,.6);
     		font-size: 14px;
 		}
-		  .nav-icon-glyph {
-    font-family: Numaicons,Arial,sans-serif;
-    color: #2176ff;
-    font-size: 1.8em;
-}
+		.nav-icon-glyph {
+		  font-family: Numaicons,Arial,sans-serif;
+		  color: #2176ff;
+		  font-size: 1.8em;
+		}
 		/*=============*/
 		/* customers-dropdown_menu-industry */
 		/*=============*/
@@ -257,10 +270,77 @@
 			display: grid;
 			grid-template-columns: repeat(2, 1fr);
 		}
+
+		@media screen and (max-width: 1024px) {
+			/*=============*/
+			/* customers-dropdown */
+			/*=============*/
+			.customers-dropdown{
+				background: rgba(0, 0, 0, .7);
+				bottom: 0;
+				margin: 0;
+			}
+			/*=============*/
+			/* customers-dropdown_container */
+			/*=============*/
+			.customers-dropdown_container{
+				margin: auto;
+				justify-content: center;
+			}
+			/*=============*/
+			/* customers-dropdown_menu */
+			/*=============*/
+			.customers-dropdown_menu{
+				max-width: 90%;
+				margin-right: 0;
+				border-radius: 20px;
+				position: relative;
+				padding-top: 50px;
+			}
+			/*=============*/
+			/* customers-dropdown_menu-close */
+			/*=============*/
+			.customers-dropdown_menu-closeWrapper{
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				display: inline-flex;
+
+			}
+			.customers-dropdown_menu-close{
+				display: inline-flex;
+		    justify-content: space-between;
+		    align-items: center;
+		    position: fixed;
+		    background: #fff;
+		    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+		    padding: 10px 35px 8px;
+		    width: 90%;
+		    border-top-left-radius: 20px;
+		    border-top-right-radius: 20px;
+			}
+		}
+		@media screen and (max-width: 446px) {
+			/*=============*/
+			/* customers-dropdown_menu-grid */
+			/*=============*/
+			.customers-dropdown_menu-grid{
+				width: 100%;
+				display: grid;
+				grid-template-columns: repeat(1, 1fr);
+			}
+			/*=============*/
+			/* customers-dropdown_menu */
+			/*=============*/
+			.customers-dropdown_menu{
+				max-height: 80vh;
+				overflow-y: scroll;
+			}
+		}
  	</style>
  	<script type="text/javascript">
- 		$('#customers').click(() => {
- 			console.log('ok')
+ 		$('.customers-dropdown-close').click(() => {
  			$('#customers-dropdown').toggleClass('customers-dropdown-open')
  		})
  	</script>
