@@ -407,6 +407,11 @@
  				customersDropdown.classList.toggle('customers-dropdown-open')
  			}
  		})
+ 		document.addEventListener('keyup', ({code}) => {
+ 			if(code === 'Escape'){
+ 				customersDropdown.classList.remove('customers-dropdown-open')
+ 			}
+ 		})
  	</script>
  </body>
  </html>											 
