@@ -12,7 +12,7 @@
  	<p class="customers-dropdown-close">customers</p>
  	<nav class="customers-dropdown" id="customers-dropdown">
  		<div class="customers-dropdown_container">
- 			<div class="customers-dropdown_menu">
+ 			<div class="customers-dropdown_menu" id="customers-dropdown_menu">
 
  				<div class="customers-dropdown_menu-closeWrapper">
 
@@ -29,11 +29,14 @@
  					<div class="dropdown_menu-item_content">
  						<p class="dropdown_menu-item_title dropdown_menu-item_title-0">Customer Stories</p>
  						<span class="dropdown_menu-item_subTitle">How others use Numa</span>
+ 						<div class="nav-menu-item-forward-indicator"></div>
  					</div>
  				</a>
 
 
- 				<span class="customers-dropdown_menu-industry">By Industry</span>
+ 				<span class="customers-dropdown_menu-industry">
+ 					<span>By Industry</span>
+ 				</span>
 
  				<div class="customers-dropdown_menu-grid">
  					<a data-category="nav" data-label="customers-salons" href="/helps/salon-and-beauty" class="customers-dropdown_menu-item" tabindex="0">
@@ -131,6 +134,7 @@
  			</div>
  		</div>
  	</nav>
+ 	
 
  	<style>
 		@font-face {
@@ -176,7 +180,7 @@
 		/* customers-dropdown_menu */
 		/*=============*/
 		.customers-dropdown_menu{
-			max-width: 410px;
+			max-width: 370px;
 			width: 100%;
 			margin-right: 13%;
 			box-shadow: 0 50px 25px -50px rgba(32,53,90,.15), 8px 18px 60px 4px rgba(0,0,0,.13);
@@ -199,6 +203,7 @@
 			text-decoration: none;
 			align-items: center;
 			padding: 0 10px;
+			position: relative;
 		}
 		.customers-dropdown_menu-item:hover{
 			text-decoration: none;
@@ -250,17 +255,43 @@
 		  color: #2176ff;
 		  font-size: 1.8em;
 		}
+		.nav-menu-item-forward-indicator{
+			padding-right: 6px;
+		    font-family: Numaicons,Arial,sans-serif;
+		    color: #2176ff;
+		    position: absolute;
+		    right: 0;
+		    top: 9px;
+		    font-size: 23px;
+		}
 		/*=============*/
 		/* customers-dropdown_menu-industry */
 		/*=============*/
 		.customers-dropdown_menu-industry{
 			display: block;
+			position: relative;
 			margin-left: 10px;
 		    padding-right: 10px;
 		    padding-left: 10px;
 		    background-color: #fff;
 		    color: #999;
 		    font-size: .8em;
+		}
+		.customers-dropdown_menu-industry::before{
+			content: '';
+			position: absolute;
+			width: 100%;
+			height: 1px;
+			background-color: #eaeaea;
+			top: 10px;
+			left: 0;
+		}
+		.customers-dropdown_menu-industry span{
+			display: inline;
+			position: relative;
+			z-index: 100;
+			padding: 0 2px;
+			background: #fff;
 		}
 		/*=============*/
 		/* customers-dropdown_menu-grid */
@@ -306,6 +337,7 @@
 				left: 0;
 				right: 0;
 				display: inline-flex;
+				z-index: 200;
 
 			}
 			.customers-dropdown_menu-close{
@@ -340,8 +372,26 @@
 		}
  	</style>
  	<script type="text/javascript">
- 		$('.customers-dropdown-close').click(() => {
- 			$('#customers-dropdown').toggleClass('customers-dropdown-open')
+ 		const customersDropdown = document.getElementById('customers-dropdown')
+ 		const customersDropdownMenu = document.getElementById('customers-dropdown_menu')
+
+
+ 		document.addEventListener('click', ({clientY, clientX, target}) => {
+ 			let validationClick = (customersDropdown.classList.contains('customers-dropdown-open') && target.className != 'customers-dropdown-close')
+
+ 			if(validationClick){
+ 				let {right, left, bottom, top} = customersDropdownMenu.getBoundingClientRect()
+
+ 				let validationX = (clientX < left || clientX > right)
+ 				let validationY = (clientY < top || clientY > bottom)
+
+ 				if(validationY || validationX){
+ 					customersDropdown.classList.toggle('customers-dropdown-open')
+ 				}
+
+ 			}else if(target.className === 'customers-dropdown-close'){
+ 				customersDropdown.classList.toggle('customers-dropdown-open')
+ 			}
  		})
  	</script>
  </body>
